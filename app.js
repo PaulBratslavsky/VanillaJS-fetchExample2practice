@@ -14,6 +14,27 @@ document.getElementById('getUsers')
     getUsers( setUrl(rootUrl, usersUrl) );
 });
 
+document.getElementById('send-form')
+.addEventListener('click', (e) => {
+    e.preventDefault();
+    // GET DATA
+    let data = {};
+
+    const name =     document.getElementById('name').value;
+    const username = document.getElementById('username').value;
+    const email =    document.getElementById('email').value;  
+    
+    data = { name, username, email };
+
+    // SEND DATA
+    addUser(setUrl(rootUrl, usersUrl), data);
+    
+    // RESET INPUT FIELDS
+    clearInput();
+
+    
+});
+
 /*********************************
     HTTP API CALL FUNCTIONS
 *********************************/
@@ -26,6 +47,15 @@ function getUsers(url) {
         showUsers(result);
     })
     .catch( error => console.error(error, "DANGER"));
+}
+
+// POST USER FUNCTION
+function addUser(url, data) {
+    http.post(url, data)
+    .then(data => console.log(data, "CONFIRM"))
+    .catch(error => console.error(error, "From Error"));
+    
+    console.log(url, data, 'User Added');
 }
 
 
@@ -50,3 +80,8 @@ function showUsers(users) {
     document.getElementById('output').innerHTML = output;
 }
 
+function clearInput() {
+    document.getElementById('name').value = '';
+    document.getElementById('username').value = '';
+    document.getElementById('email').value = '';
+}
