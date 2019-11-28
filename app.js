@@ -1,4 +1,4 @@
-console.log('USING FETCH');
+// console.log('USING FETCH');
 
 const http = new easyHTTP();
 console.log(http);
@@ -57,6 +57,28 @@ function addUser(url, data) {
     
     console.log(url, data, 'User Added');
 }
+
+// PUT USER FUNCTION 
+function updateUser(url, data) {
+    http.put(url, data)
+    .then(data => console.log(data, "CONFIRM"))
+    .catch(error => console.error(error, "From Error"));
+    
+    console.log(url, data, 'USER Updated');
+}
+
+// updateUser('https://jsonplaceholder.typicode.com/users/10', {name: 'test', username: 'test', email: 'test'});
+
+// DELETE USER FUNCTION 
+function deleteUser(url) {
+    console.log(url);
+    http.delete(url)
+        .then( result => console.log(result, "WHERE"))
+        .catch( error => console.error(error, "From Error"));
+}
+
+deleteUser('https://jsonplaceholder.typicode.com/users/10');
+
 
 
 /*********************************
